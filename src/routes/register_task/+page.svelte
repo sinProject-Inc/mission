@@ -4,7 +4,7 @@
     import { dialogs } from "svelte-dialogs";
   
     let task_input_element: HTMLInputElement
-    let description_input_element: HTMLInputElement
+    let description_input_element: HTMLTextAreaElement
     let price_input_element: HTMLInputElement
 
     onMount(() => task_input_element.focus())
@@ -44,18 +44,17 @@
             placeholder="タスク"
             required
           />
-          <input
-            bind:this={description_input_element}
-            type="text"
-            name="description"
-            placeholder="詳細"
-          />
-          <input
-          bind:this={price_input_element}
-          type="number"
-          name="price"
-          placeholder="単価"
-          />
+          <textarea bind:this={description_input_element} placeholder="詳細" rows="5" name="description"></textarea>
+          <div>
+            <input
+            bind:this={price_input_element}
+            type="number"
+            name="price"
+            placeholder="単価"
+            class="price"
+            />
+            <span>円</span>
+          </div>
           <div class="buttons">
             <button type="submit">タスク登録</button>
           </div>
@@ -69,10 +68,15 @@
       margin: 0;
     }
   
-    input {
+    input textarea {
       width: calc(100% - 18px);
     }
-  
+
+    input.price {
+      width: 100px;
+      text-align: right;
+    }
+    
     button {
       white-space: nowrap;
     }
