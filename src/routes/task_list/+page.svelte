@@ -11,17 +11,17 @@
 </svelte:head>
 <div>
 	<div class="outer">
-		<div class="frame glass flex_column">
-			<div class="center flex_column_logo">
-				<div class="login_text">タスク一覧</div>
-			</div>
-
+		<div class="center title">
+			<div class="title_text left">ミッション一覧</div>
+      <div><button>New Mission</button></div>
+		</div>
+		<div class="left task-list">
 			<form method="POST" class="flex_column" use:enhance={() => {}}>
-				<ul>
+				<ul class="task-outer">
 					{#each data.tasks as task}
 						<li>
-							<ul>
-								<li>{task.name}</li>
+							<ul class="task-inner">
+								<li class="task-title">{task.name}</li>
 								<li>{task.description}</li>
 								<li>{task.price}</li>
 							</ul>
@@ -36,26 +36,23 @@
 <style>
 	:global(body) {
 		margin: 0;
+    background-color: black;
+    color: #fff;
 	}
 
-	input textarea {
-		width: calc(100% - 18px);
-	}
-
-	input.price {
-		width: 100px;
-		text-align: right;
-	}
 
 	button {
 		white-space: nowrap;
+    padding: 10px 25px;
+    border-radius: 10px;
+    border: none;
+    background-color: #238636;
+    color: #fff;
+    font-size: 1.2rem;
+
 	}
 
-	.error {
-		color: red;
-	}
-
-	.login_text {
+	.title_text {
 		font-size: 26px;
 	}
 
@@ -65,28 +62,16 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
-	}
-
-	.frame {
-		padding: 30px;
-		background: #d93025;
-		width: 100%;
-		max-width: 500px;
-	}
-
-	.glass {
-		background: rgba(240, 240, 240, 0.5);
-		box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-		backdrop-filter: blur(8px);
-		-webkit-backdrop-filter: blur(8px);
-		border-radius: 8px;
-		border: 1px solid rgba(128, 128, 128, 0.25);
-		color: black;
+    flex-direction: column;
 	}
 
 	.center {
 		text-align: center;
 	}
+
+  .left {
+    text-align: left;
+  }
 
 	.buttons {
 		display: flex;
@@ -102,12 +87,46 @@
 		color: rgb(200, 200, 200);
 	}
 
-	.flex_column_logo {
-		display: flex;
-		flex-flow: column;
-		gap: 0px;
-		margin: 6px 0;
+	.title {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 15px;
+    margin-bottom: 15px;
 	}
+
+  .task-list {
+    width: 100%;
+    height: 100%;
+  }
+
+  .task-outer {
+    width: 95%;
+  }
+
+  ul.task-outer {
+    padding-left: 0;
+    margin-left: 0;
+  }
+
+  .task-outer li {
+    list-style: none;
+  }
+
+  .task-inner {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    border: 0.5px solid gray;
+    padding: 10px;
+  }
+
+  .task-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
 
 	.flex_column {
 		display: flex;
