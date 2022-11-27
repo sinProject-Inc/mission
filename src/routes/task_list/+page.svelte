@@ -1,19 +1,20 @@
 <script lang="ts">
 	import { enhance } from '$app/forms'
 	import type { PageData } from './$types'
+  import "../../assets/css/common.css";
 
 	/** @type {import('./$types').PageData} */
 	export let data: PageData
 </script>
 
 <svelte:head>
-	<title>タスク一覧</title>
+	<title>ミッション一覧</title>
 </svelte:head>
 <div>
 	<div class="outer">
 		<div class="center title">
 			<div class="title_text left">ミッション一覧</div>
-      <div><button>New Mission</button></div>
+      <div><a class="button" href="register_task">New Mission</a></div>
 		</div>
 		<div class="left task-list">
 			<form method="POST" class="flex_column" use:enhance={() => {}}>
@@ -34,24 +35,6 @@
 </div>
 
 <style>
-	:global(body) {
-		margin: 0;
-    background-color: black;
-    color: #fff;
-	}
-
-
-	button {
-		white-space: nowrap;
-    padding: 10px 25px;
-    border-radius: 10px;
-    border: none;
-    background-color: #238636;
-    color: #fff;
-    font-size: 1.2rem;
-
-	}
-
 	.title_text {
 		font-size: 26px;
 	}
@@ -94,6 +77,7 @@
     justify-content: space-between;
     margin-top: 15px;
     margin-bottom: 15px;
+    align-items: center;
 	}
 
   .task-list {

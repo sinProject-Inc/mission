@@ -1,0 +1,44 @@
+:root {
+    --button-color: #238636;
+}
+
+body {
+    margin: 0;
+    background-color: black;
+    color: #fff;
+}
+
+a {
+    color: #57a4fc;
+}
+
+input[type=text],input[type=number],textarea {
+    background-color: #000;
+    color: #fff;
+    font-size: 1.2rem;
+    padding: 10px;
+}
+
+.button {
+    white-space: nowrap;
+    padding: 10px 25px;
+    border-radius: 10px;
+    border: none;
+    background-color: var(--button-color);
+    color: #fff;
+    font-size: 1.2rem;
+    text-decoration: none;
+}
+
+.dialog__container {
+    background-color: #000;
+}
+
+.dialog__title {
+    color: #fff;
+}
+
+.dialog__button {
+    background-color: var(--button-color);
+    color: #fff;
+}
