@@ -2,6 +2,7 @@
     import { enhance } from '$app/forms'
     import { onMount } from 'svelte';
     import { dialogs } from "svelte-dialogs";
+    import "../../assets/css/common.css";
   
     let task_input_element: HTMLInputElement
     let description_input_element: HTMLTextAreaElement
@@ -12,13 +13,13 @@
   </script>
   
   <svelte:head>
-    <title>タスク登録</title>
+    <title>ミッション登録</title>
   </svelte:head>
   <div>
     <div class="outer">
       <div class="frame glass flex_column">
         <div class="center flex_column_logo">
-          <div class="login_text">タスク登録</div>
+          <div class="title">ミッション登録</div>
         </div>
   
         <form
@@ -56,7 +57,10 @@
             <span>円</span>
           </div>
           <div class="buttons">
-            <button type="submit">タスク登録</button>
+            <button type="submit" class="button">ミッション登録</button>
+          </div>
+          <div>
+            <a href="task_list">ミッション一覧</a>
           </div>
         </form>
       </div>
@@ -64,10 +68,6 @@
   </div>
   
   <style>
-    :global(body) {
-      margin: 0;
-    }
-  
     input textarea {
       width: calc(100% - 18px);
     }
@@ -85,8 +85,9 @@
       color: red;
     }
   
-    .login_text {
+    .title {
       font-size: 26px;
+      color: #fff;
     }
   
     .outer {
@@ -105,7 +106,7 @@
     }
   
     .glass {
-      background: rgba(240, 240, 240, 0.5);
+      background: rgba(240, 240, 240, 0.2);
       box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
