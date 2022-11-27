@@ -24,7 +24,7 @@
 							<ul class="task-inner">
 								<li class="task-title">{task.name}</li>
 								<li>{task.description}</li>
-								<li>{task.price}</li>
+								<li>{task.price.toLocaleString()}円</li>
 							</ul>
 						</li>
 					{/each}
