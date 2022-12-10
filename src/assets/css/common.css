@@ -12,7 +12,7 @@ a {
     color: #57a4fc;
 }
 
-input[type=text],input[type=number],textarea {
+input[type=text],input[type=number],input[type=password],textarea {
     background-color: #000;
     color: #fff;
     font-size: 1.2rem;
