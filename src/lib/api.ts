@@ -18,4 +18,17 @@ export class Api {
 			}
 		})
 	}
+
+	public async validate_email(email: string): Promise<boolean> {
+		const email_regex = new RegExp(
+			/^[a-zA-Z0-9_.+-]+@([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\.)+[a-zA-Z]{2,}$/
+		)
+		return new Promise((resolve) => {
+			if (email_regex.test(email)) {
+				resolve(true)
+			} else {
+				resolve(false)
+			}
+		})
+	}
 }

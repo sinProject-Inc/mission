@@ -11,7 +11,18 @@
 
 	onMount(() => email_input_element.focus())
 
-	const onBlur = async () => {
+	const onBlurEmail = async () => {
+		error_username = ''
+		const email = email_input_element.value
+		//@ts-ignore
+		const isValid = await new Api().validate_email(email)
+		if (!isValid) {
+			error_username = '正しいメールアドレスを入力してください'
+			email_input_element.focus()
+		}
+	}
+
+	const onBlurUsername = async () => {
 		error_username = ''
 		const username = username_input_element.value
 		//@ts-ignore
@@ -39,6 +50,7 @@
 					name="email"
 					placeholder="メールアドレス"
 					required
+					on:blur={onBlurEmail}
 				/>
 				<input
 					bind:this={password_input_element}
@@ -53,7 +65,7 @@
 					name="username"
 					placeholder="ユーザー名"
 					required
-					on:blur={onBlur}
+					on:blur={onBlurUsername}
 				/>
 				<span>
 					{error_username}
