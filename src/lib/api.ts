@@ -31,4 +31,17 @@ export class Api {
 			}
 		})
 	}
+
+	public async validate_password(password: string): Promise<boolean> {
+		const password_regex = new RegExp(
+			/^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?\d)[a-zA-Z\d]{8,100}$/
+		)
+		return new Promise((resolve) => {
+			if (password_regex.test(password)) {
+				resolve(true)
+			} else {
+				resolve(false)
+			}
+		})
+	}
 }

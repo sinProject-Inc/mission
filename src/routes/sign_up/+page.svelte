@@ -8,6 +8,7 @@
 	let password_input_element: HTMLInputElement
 	let username_input_element: HTMLInputElement
 	let error_email = ''
+	let error_password = ''
 	let error_username = ''
 
 	onMount(() => email_input_element.focus())
@@ -15,7 +16,6 @@
 	const onBlurEmail = async () => {
 		error_email = ''
 		const email = email_input_element.value.trim()
-		console.log(email)
 		//@ts-ignore
 		const isValid = await new Api().validate_email(email)
 		if (!isValid) {
@@ -23,6 +23,19 @@
 			email_input_element.focus()
 		}
 		email_input_element.value = email
+	}
+
+	const onBlurPassword = async () => {
+		error_password = ''
+		const password = password_input_element.value.trim()
+
+		const isValid = await new Api().validate_password(password)
+		if (!isValid) {
+			error_password = 'パスワードは半角小文字、半角大文字、数字をすべて含む8文字以上で入力してください'
+			password_input_element.focus()
+		}
+
+		password_input_element.value = password
 	}
 
 	const onBlurUsername = async () => {
@@ -65,7 +78,9 @@
 					name="password"
 					placeholder="パスワード"
 					required
+					on:blur={onBlurPassword}
 				/>
+				{error_password}
 				<input
 					bind:this={username_input_element}
 					type="text"
