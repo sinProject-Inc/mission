@@ -7,30 +7,34 @@
 	let email_input_element: HTMLInputElement
 	let password_input_element: HTMLInputElement
 	let username_input_element: HTMLInputElement
+	let error_email = ''
 	let error_username = ''
 
 	onMount(() => email_input_element.focus())
 
 	const onBlurEmail = async () => {
-		error_username = ''
-		const email = email_input_element.value
+		error_email = ''
+		const email = email_input_element.value.trim()
+		console.log(email)
 		//@ts-ignore
 		const isValid = await new Api().validate_email(email)
 		if (!isValid) {
-			error_username = '正しいメールアドレスを入力してください'
+			error_email = '正しいメールアドレスを入力してください'
 			email_input_element.focus()
 		}
+		email_input_element.value = email
 	}
 
 	const onBlurUsername = async () => {
 		error_username = ''
-		const username = username_input_element.value
+		const username = username_input_element.value.trim()
 		//@ts-ignore
 		const isExist = await new Api().username_exists(username)
 		if (isExist) {
 			error_username = 'ユーザー名が既に存在します'
 			username_input_element.focus()
 		}
+		username_input_element.value = username
 	}
 </script>
 
@@ -52,6 +56,9 @@
 					required
 					on:blur={onBlurEmail}
 				/>
+				<span>
+					{error_email}
+				</span>
 				<input
 					bind:this={password_input_element}
 					type="password"
