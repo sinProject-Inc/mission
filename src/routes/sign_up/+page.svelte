@@ -2,11 +2,13 @@
 	import { enhance } from '$app/forms'
 	import { onMount } from 'svelte'
 	import { Api } from '$lib/api'
+	import { dialogs } from 'svelte-dialogs'
 	import '../../assets/css/common.css'
 
 	let email_input_element: HTMLInputElement
 	let password_input_element: HTMLInputElement
 	let username_input_element: HTMLInputElement
+	let display_name_input_element: HTMLInputElement
 	let error_email = ''
 	let error_password = ''
 	let error_username = ''
@@ -31,7 +33,8 @@
 
 		const isValid = await new Api().validate_password(password)
 		if (!isValid) {
-			error_password = 'パスワードは半角小文字、半角大文字、数字をすべて含む8文字以上で入力してください'
+			error_password =
+				'パスワードは半角小文字、半角大文字、数字をすべて含む8文字以上で入力してください'
 			password_input_element.focus()
 		}
 
@@ -60,7 +63,21 @@
 			<div class="title_text left">Welcome to Mission!</div>
 		</div>
 		<div class="center inner">
-			<form method="POST" class="flex_column" use:enhance={() => {}}>
+			<form
+				method="POST"
+				class="flex_column"
+				use:enhance={() => {
+					return async ({ result }) => {
+						if (result.type == 'success') {
+							email_input_element.value = ''
+							password_input_element.value = ''
+							username_input_element.value = ''
+							display_name_input_element.value = ''
+							dialogs.alert(result.data.message)
+						}
+					}
+				}}
+			>
 				<input
 					bind:this={email_input_element}
 					type="text"
@@ -92,6 +109,12 @@
 				<span>
 					{error_username}
 				</span>
+				<input
+					bind:this={display_name_input_element}
+					type="text"
+					name="displayname"
+					placeholder="表示名"
+				/>
 				<button type="submit" class="button half">登録</button>
 			</form>
 		</div>
