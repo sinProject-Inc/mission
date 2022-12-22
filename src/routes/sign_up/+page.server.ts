@@ -1,5 +1,6 @@
 import { db } from '$lib/database/database'
 import type { Actions } from '@sveltejs/kit'
+import{sha256} from '$lib/hash'
 
 export const actions: Actions = {
 	default: async ({ request }) => {
@@ -8,10 +9,12 @@ export const actions: Actions = {
 		const password = data.get('password') as string
 		const username = data.get('username') as string
 		const display_name = data.get('displayname') as string
+        const hashedPassword = await sha256(password)
+        
 		const user = {
 			name: username,
 			email: email,
-			password: password,
+			password: hashedPassword,
 			displayName: display_name,
 		}
 		await db.user.create({ data: user })
