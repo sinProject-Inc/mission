@@ -12,6 +12,7 @@ model User {
   displayName String   @db.VarChar(255)
   email       String   @db.VarChar(255)
   password    String   @db.VarChar(255)
+  isEnabled   Boolean  @default(false)
 }
 
 model Task {
