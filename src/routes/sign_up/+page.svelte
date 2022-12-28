@@ -18,6 +18,9 @@
 	const onBlurEmail = async () => {
 		error_email = ''
 		const email = email_input_element.value.trim()
+
+		if (email === '') return;
+
 		//@ts-ignore
 		const isValid = await new Api().validate_email(email)
 		if (!isValid) {
@@ -30,6 +33,8 @@
 	const onBlurPassword = async () => {
 		error_password = ''
 		const password = password_input_element.value.trim()
+
+		if (password === '') return;
 
 		const isValid = await new Api().validate_password(password)
 		if (!isValid) {
@@ -44,6 +49,9 @@
 	const onBlurUsername = async () => {
 		error_username = ''
 		const username = username_input_element.value.trim()
+
+		if (username === '') return;
+
 		//@ts-ignore
 		const isExist = await new Api().username_exists(username)
 		if (isExist) {
