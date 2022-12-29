@@ -8,11 +8,11 @@ datasource db {
 }
 
 model User {
-  name        String   @id @db.VarChar(255)
-  displayName String   @db.VarChar(255)
-  email       String   @db.VarChar(255)
-  password    String   @db.VarChar(255)
-  isEnabled   Boolean  @default(false)
+  name        String  @id @db.VarChar(255)
+  displayName String  @db.VarChar(255)
+  email       String  @db.VarChar(255)
+  password    String  @db.VarChar(255)
+  isEnabled   Boolean @default(false)
 }
 
 model Task {
@@ -22,4 +22,10 @@ model Task {
   price       Int
   updateDate  DateTime @db.DateTime(0)
   createDate  DateTime @default(now())
+}
+
+model UserRegistration {
+  id             Int      @id @default(autoincrement())
+  registerId     String   @db.VarChar(255)
+  expirationDate DateTime @db.DateTime(0)
 }
