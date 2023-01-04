@@ -1,6 +1,6 @@
-import prisma from '@prisma/client'
+import { PrismaClient } from '@prisma/client'
+export const db = new PrismaClient()
 
-export const db = new prisma.PrismaClient()
 
 export class Database {
 	public static async getAppSettingInt(key: string): Promise<number> {
