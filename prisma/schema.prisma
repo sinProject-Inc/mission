@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -10,11 +7,26 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model User {
+  name        String  @id @db.VarChar(255)
+  displayName String  @db.VarChar(255)
+  email       String  @db.VarChar(255)
+  password    String  @db.VarChar(255)
+  isEnabled   Boolean @default(false)
+}
+
 model Task {
-  id          Int     @id @default(autoincrement())
-  name        String? @db.VarChar(255)
-  description String  @db.VarChar(255)
-  price       Int     @db.Int
-  updateDate  DateTime @db.DateTime
+  id          Int      @id @default(autoincrement())
+  name        String?  @db.VarChar(255)
+  description String   @db.VarChar(255)
+  price       Int
+  updateDate  DateTime @db.DateTime(0)
   createDate  DateTime @default(now())
+}
+
+model UserRegistration {
+  id             Int      @id @default(autoincrement())
+  registerId     String   @db.VarChar(255)
+  expirationDate DateTime @db.DateTime(0)
+  userName       String   @db.VarChar(255)
 }
