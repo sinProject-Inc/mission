@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { enhance } from '$app/forms'
 	import type { PageData } from './$types'
-  import "../../assets/css/common.css";
+	import '../../assets/css/common.css'
 
 	/** @type {import('./$types').PageData} */
 	export let data: PageData
@@ -14,7 +14,7 @@
 	<div class="outer">
 		<div class="center title">
 			<div class="title_text left">ミッション一覧</div>
-      <div><a class="button" href="register_task">New Mission</a></div>
+			<div><a class="button" href="register_task">New Mission</a></div>
 		</div>
 		<div class="left task-list">
 			<form method="POST" class="flex_column" use:enhance={() => {}}>
@@ -22,7 +22,7 @@
 					{#each data.tasks as task}
 						<li>
 							<ul class="task-inner">
-								<li class="task-title">{task.name}</li>
+								<li class="task-title"><a href="editor_task">{task.name}</a></li>
 								<li>{task.description}</li>
 								<li>{task.price.toLocaleString()}円</li>
 							</ul>
@@ -45,16 +45,16 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
-    flex-direction: column;
+		flex-direction: column;
 	}
 
 	.center {
 		text-align: center;
 	}
 
-  .left {
-    text-align: left;
-  }
+	.left {
+		text-align: left;
+	}
 
 	.buttons {
 		display: flex;
@@ -71,46 +71,46 @@
 	}
 
 	.title {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-top: 15px;
-    margin-bottom: 15px;
-    align-items: center;
+		width: 100%;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		margin-top: 15px;
+		margin-bottom: 15px;
+		align-items: center;
 	}
 
-  .task-list {
-    width: 100%;
-    height: 100%;
-  }
+	.task-list {
+		width: 100%;
+		height: 100%;
+	}
 
-  .task-outer {
-    width: 95%;
-  }
+	.task-outer {
+		width: 95%;
+	}
 
-  ul.task-outer {
-    padding-left: 0;
-    margin-left: 0;
-  }
+	ul.task-outer {
+		padding-left: 0;
+		margin-left: 0;
+	}
 
-  .task-outer li {
-    list-style: none;
-  }
+	.task-outer li {
+		list-style: none;
+	}
 
-  .task-inner {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 100%;
-    border: 0.5px solid gray;
-    padding: 10px;
-  }
+	.task-inner {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		width: 100%;
+		border: 0.5px solid gray;
+		padding: 10px;
+	}
 
-  .task-title {
-    font-size: 1.2rem;
-    font-weight: bold;
-  }
+	.task-title {
+		font-size: 1.2rem;
+		font-weight: bold;
+	}
 
 	.flex_column {
 		display: flex;
