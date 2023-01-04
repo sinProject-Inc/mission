@@ -45,13 +45,13 @@ export const actions: Actions = {
 
 async function sendRegisterMail(email: string, register_id: string) {
 	const nodeMailerManager = new NodeMailerManager()
-	const userRegistrationUrl = createRegisterUrl(register_id);
+	const userRegistrationUrl = createRegisterUrl(register_id)
 
 	try {
 		await nodeMailerManager.sendMail(
 			email,
 			'mission ユーザー仮登録',
-			`ユーザー仮登録を行いました。以下のリンクをクリックして登録を完了させてください。: ${userRegistrationUrl}`
+			`ユーザー仮登録を行いました。以下のリンクをクリックして登録を完了させてください。\n ${userRegistrationUrl}`
 		)
 	} catch (error) {
 		console.error(error)
@@ -62,4 +62,3 @@ function createRegisterUrl(register_id: string) {
 	// TODO: 本番環境用のURLを設定する
 	return `http://localhost:5173/sign_up_complete/${register_id}`
 }
-
