@@ -28,4 +28,5 @@ model UserRegistration {
   id             Int      @id @default(autoincrement())
   registerId     String   @db.VarChar(255)
   expirationDate DateTime @db.DateTime(0)
+  userName       String   @db.VarChar(255)
 }
