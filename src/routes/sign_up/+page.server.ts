@@ -29,6 +29,7 @@ export const actions: Actions = {
 		const register = {
 			registerId: register_id,
 			expirationDate: expiration_date,
+			userName: username,
 		}
 		await db.userRegistration.create({ data: register })
 
