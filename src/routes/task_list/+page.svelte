@@ -22,7 +22,7 @@
 					{#each data.tasks as task}
 						<li>
 							<ul class="task-inner">
-								<li class="task-title"><a href="editor_task">{task.name}</a></li>
+								<li class="task-title"><a href="editor_task?id={task.id}">{task.name}</a></li>
 								<li>{task.description}</li>
 								<li>{task.price.toLocaleString()}円</li>
 							</ul>
