@@ -34,7 +34,7 @@ export const actions: Actions = {
 		await db.userRegistration.create({ data: register })
 
 		// 本登録用のメールを送信する
-		await sendRegisterMail(email, register_id)
+		await sendRegisterMail(email, register_id, request.url)
 
 		return {
 			success: true,
@@ -43,9 +43,9 @@ export const actions: Actions = {
 	},
 }
 
-async function sendRegisterMail(email: string, register_id: string) {
+async function sendRegisterMail(email: string, register_id: string, url: string) {
 	const nodeMailerManager = new NodeMailerManager()
-	const userRegistrationUrl = createRegisterUrl(register_id)
+	const userRegistrationUrl = createRegisterUrl(register_id, url)
 
 	try {
 		await nodeMailerManager.sendMail(
@@ -58,7 +58,6 @@ async function sendRegisterMail(email: string, register_id: string) {
 	}
 }
 
-function createRegisterUrl(register_id: string) {
-	// TODO: 本番環境用のURLを設定する
-	return `http://localhost:5173/sign_up_complete/${register_id}`
+function createRegisterUrl(register_id: string, url) {
+	return `${url}/${register_id}`
 }
