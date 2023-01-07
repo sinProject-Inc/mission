@@ -32,6 +32,7 @@
 					}
 				}}
 			>
+				<p class="label">ユーザー名</p>
 				<input
 					bind:this={username_input_element}
 					type="text"
@@ -39,6 +40,7 @@
 					placeholder="ユーザー名"
 					required
 				/>
+				<p class="label">パスワード</p>
 				<input
 					bind:this={password_input_element}
 					type="password"
@@ -49,11 +51,17 @@
 				{error_message}
 				<button type="submit" class="button half">ログイン</button>
 			</form>
+				<p>Missionに参加する？<a href="/sign_up">アカウントを作成</a></p>
 		</div>
 	</div>
 </div>
 
 <style>
+	.label {
+		text-align: left;
+		margin-top: 15px;
+		margin-bottom: 5px;
+	}
 	button {
 		white-space: nowrap;
 	}
