@@ -30,7 +30,6 @@ export const actions: Actions = {
 				name: task,
 				description: description,
 				price: priceIntvalue,
-				createDate: new Date(),
 				updateDate: new Date(),
 			},
 		})

@@ -13,7 +13,7 @@
 </script>
 
 <svelte:head>
-	<title>ミッション登録</title>
+	<title>ミッション編集</title>
 </svelte:head>
 <div>
 	<div class="outer">
@@ -26,7 +26,6 @@
 				method="POST"
 				class="flex_column"
 				use:enhance={() => {
-					console.log('post')
 					return async ({ result }) => {
 						if (result.type == 'success') {
 							dialogs.alert(result.data?.message)
