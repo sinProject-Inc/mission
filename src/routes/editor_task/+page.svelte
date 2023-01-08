@@ -3,22 +3,23 @@
 	import { onMount } from 'svelte'
 	import { dialogs } from 'svelte-dialogs'
 	import '../../assets/css/common.css'
+	import type { PageData } from './$types'
 
-	let task_input_element: HTMLInputElement
-	let description_input_element: HTMLTextAreaElement
-	let price_input_element: HTMLInputElement
+	export let data: PageData
 
-	onMount(() => task_input_element.focus())
+	let tittle: HTMLInputElement
+
+	onMount(() => tittle.focus())
 </script>
 
 <svelte:head>
-	<title>ミッション登録</title>
+	<title>ミッション編集</title>
 </svelte:head>
 <div>
 	<div class="outer">
 		<div class="frame glass flex_column">
 			<div class="center flex_column_logo">
-				<div class="title">ミッション登録</div>
+				<div class="title">ミッション編集</div>
 			</div>
 
 			<form
@@ -27,31 +28,24 @@
 				use:enhance={() => {
 					return async ({ result }) => {
 						if (result.type == 'success') {
-							task_input_element.focus()
-							task_input_element.value = ''
-							description_input_element.value = ''
-							price_input_element.value = ''
-							dialogs.alert(result.data.message)
+							dialogs.alert(result.data?.message)
 						}
 					}
 				}}
 			>
+				<input type="hidden" value={data.task?.id} name="id" />
 				<input
-					bind:this={task_input_element}
+					bind:this={tittle}
+					value={data.task?.name}
 					type="text"
 					name="task"
 					placeholder="タスク"
 					required
 				/>
-				<textarea
-					bind:this={description_input_element}
-					placeholder="詳細"
-					rows="5"
-					name="description"
-				/>
+				<textarea value={data.task?.description} placeholder="詳細" rows="5" name="description" />
 				<div>
 					<input
-						bind:this={price_input_element}
+						value={data.task?.price}
 						type="number"
 						name="price"
 						placeholder="単価"
@@ -60,7 +54,7 @@
 					<span>円</span>
 				</div>
 				<div class="buttons">
-					<button type="submit" class="button">ミッション登録</button>
+					<button type="submit" class="button">更新</button>
 				</div>
 				<div>
 					<a href="task_list">ミッション一覧</a>
