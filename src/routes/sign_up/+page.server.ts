@@ -34,7 +34,7 @@ export const actions: Actions = {
 		await db.userRegistration.create({ data: register })
 
 		// 本登録用のメールを送信する
-		await sendRegisterMail(email, register_id, request.url)
+		await sendRegisterMail(email, register_id, request.headers.get('origin') + '/sign_up_complete'??'')
 
 		return {
 			success: true,
