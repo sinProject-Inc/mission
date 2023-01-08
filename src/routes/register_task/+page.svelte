@@ -25,7 +25,6 @@
 				method="POST"
 				class="flex_column"
 				use:enhance={() => {
-					console.log('post')
 					return async ({ result }) => {
 						if (result.type == 'success') {
 							task_input_element.focus()

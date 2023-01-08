@@ -21,7 +21,6 @@ export const actions: Actions = {
 		const description = data.get('description') as string
 		const price = data.get('price') as string
 		const priceIntvalue = Number(price)
-		console.log(idIntvalue)
 		await db.task.update({
 			where: {
 				id: idIntvalue,
