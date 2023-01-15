@@ -2,7 +2,11 @@
 	import { enhance } from '$app/forms'
 	import { onMount } from 'svelte'
 	import { dialogs } from 'svelte-dialogs'
+	import { redirect } from '@sveltejs/kit'
+	import type { ActionData } from './$types'
 	import '../../assets/css/common.css'
+
+	export let form: ActionData
 
 	let username_input_element: HTMLInputElement
 	let password_input_element: HTMLInputElement
@@ -20,7 +24,7 @@
 			<div class="title_text left">Login to Mission</div>
 		</div>
 		<div class="center inner">
-			<form
+			<!-- <form
 				method="POST"
 				class="flex_column"
 				use:enhance={() => {
@@ -28,10 +32,13 @@
 						if (result.type == 'success') {
 							password_input_element.value = ''
 							username_input_element.value = ''
+							console.log('画面に戻った')
+							throw redirect(302, './dashboard')
 						}
 					}
 				}}
-			>
+			> -->
+			<form method="Post" class="flex_column">
 				<p class="label">ユーザー名</p>
 				<input
 					bind:this={username_input_element}
