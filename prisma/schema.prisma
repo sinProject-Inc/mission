@@ -7,12 +7,19 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model AppSetting {
+  id         Int      @id @default(autoincrement())
+  key        String   @unique
+  value      String
+}
+
 model User {
   name        String  @id @db.VarChar(255)
   displayName String  @db.VarChar(255)
   email       String  @db.VarChar(255)
   password    String  @db.VarChar(255)
   isEnabled   Boolean @default(false)
+  auth_token AuthToken[]
 }
 
 model Task {
@@ -29,4 +36,15 @@ model UserRegistration {
   registerId     String   @db.VarChar(255)
   expirationDate DateTime @db.DateTime(0)
   userName       String   @db.VarChar(255)
+}
+
+model AuthToken {
+  id         Int      @id @default(autoincrement())
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  user_name  String 
+  token      String   @unique
+  user       User     @relation(fields: [user_name], references: [name])
+
+  @@index(updated_at)
 }
