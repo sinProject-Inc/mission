@@ -1,8 +1,6 @@
 <script lang="ts">
 	import { enhance } from '$app/forms'
 	import { onMount } from 'svelte'
-	import { dialogs } from 'svelte-dialogs'
-	import { redirect } from '@sveltejs/kit'
 	import type { ActionData } from './$types'
 	import '../../assets/css/common.css'
 
@@ -24,7 +22,8 @@
 			<div class="title_text left">Login to Mission</div>
 		</div>
 		<div class="center inner">
-			<form method="Post" class="flex_column">
+			<form method="Post" class="flex_column" use:enhance>
+				{#if form?.success === false}<p>{form?.message}</p>{/if}
 				<p class="label">ユーザー名</p>
 				<input
 					bind:this={username_input_element}
@@ -44,7 +43,7 @@
 				{error_message}
 				<button type="submit" class="button half">ログイン</button>
 			</form>
-				<p>Missionに参加する？<a href="/sign_up">アカウントを作成</a></p>
+			<p>Missionに参加する？<a href="/sign_up">アカウントを作成</a></p>
 		</div>
 	</div>
 </div>
