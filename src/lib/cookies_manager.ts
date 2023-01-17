@@ -1,4 +1,4 @@
-import type { Cookies } from "@sveltejs/kit";
+import type { Cookies } from '@sveltejs/kit'
 
 export class CookiesManager {
 	private static readonly _session_id_key = 'session_id'
@@ -10,9 +10,6 @@ export class CookiesManager {
 	}
 
 	public setSessionId(session_id: string, max_age_sec: number): void {
-		console.log(`sessionID_NAME:${CookiesManager._session_id_key}`)
-		console.log(`sessionID:${session_id}`)
-
 		this._cookies.set(CookiesManager._session_id_key, session_id, {
 			path: '/',
 			maxAge: max_age_sec,

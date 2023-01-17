@@ -24,20 +24,6 @@
 			<div class="title_text left">Login to Mission</div>
 		</div>
 		<div class="center inner">
-			<!-- <form
-				method="POST"
-				class="flex_column"
-				use:enhance={() => {
-					return async ({ result }) => {
-						if (result.type == 'success') {
-							password_input_element.value = ''
-							username_input_element.value = ''
-							console.log('画面に戻った')
-							throw redirect(302, './dashboard')
-						}
-					}
-				}}
-			> -->
 			<form method="Post" class="flex_column">
 				<p class="label">ユーザー名</p>
 				<input

@@ -6,11 +6,7 @@ import { Database, db } from '$lib/database/database'
 export class Auth {
 	public static async login(user_name: string, cookies: Cookies): Promise<void> {
 		const session_lifetime_sec = await Auth.getSessionLifetimeSec()
-		console.log(`session_lifetime_sec:${session_lifetime_sec}`)
-
 		const auth_token = await Auth.createAuthToken(user_name, session_lifetime_sec)
-		console.log(`auth_token:${auth_token.token}`)
-		console.log(`Cookies:${cookies}`)
 		new CookiesManager(cookies).setSessionId(auth_token.token, session_lifetime_sec)
 	}
 
