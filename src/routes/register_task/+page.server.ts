@@ -7,8 +7,8 @@ export const actions: Actions = {
 		const task = data.get('task') as string
 		const description = data.get('description') as string
 		const price = data.get('price') as string
-		const priceIntvalue = Number(price)
-		await db.task.create({ data: { name: task, description: description, price: priceIntvalue, createDate: new Date(), updateDate: new Date() } })
+		const price_int_value = Number(price)
+		await db.task.create({ data: { name: task, description: description, price: price_int_value, createDate: new Date(), updateDate: new Date() } })
 		return { success: true, message: 'タスクを登録しました' }
 	},
 }

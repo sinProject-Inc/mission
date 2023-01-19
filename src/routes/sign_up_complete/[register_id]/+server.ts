@@ -10,7 +10,7 @@ export const GET: RequestHandler = async ({ params }): Promise<Response> => {
 	const register_id = params.register_id ?? ''
 	let result_message = ''
 
-	const userRegistration = await db.userRegistration.findFirst({
+	const user_registration = await db.userRegistration.findFirst({
 		where: {
 			registerId: register_id,
 			expirationDate: {
@@ -22,13 +22,13 @@ export const GET: RequestHandler = async ({ params }): Promise<Response> => {
 		},
 	})
 
-	if (userRegistration === null) {
+	if (user_registration === null) {
 		result_message = 'ユーザーの登録に失敗しました。再度登録しなおしてください。'
 	}
 
 	await db.user.update({
 		where: {
-			name: userRegistration?.userName,
+			name: user_registration?.userName,
 		},
 		data: {
 			isEnabled: true,
@@ -37,7 +37,7 @@ export const GET: RequestHandler = async ({ params }): Promise<Response> => {
 
 	await db.userRegistration.delete({
 		where: {
-			id: userRegistration?.id,
+			id: user_registration?.id,
 		},
 	})
 
