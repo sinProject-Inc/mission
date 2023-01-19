@@ -34,7 +34,7 @@ export const actions: Actions = {
 		await db.userRegistration.create({ data: register })
 
 		// 本登録用のメールを送信する
-		await sendRegisterMail(email, register_id, request.headers.get('origin') + '/sign_up_complete'??'')
+		await send_register_mail(email, register_id, request.headers.get('origin') + '/sign_up_complete'??'')
 
 		return {
 			success: true,
@@ -43,12 +43,12 @@ export const actions: Actions = {
 	},
 }
 
-async function sendRegisterMail(email: string, register_id: string, url: string) {
+async function send_register_mail(email: string, register_id: string, url: string) {
 	const nodeMailerManager = new NodeMailerManager()
-	const userRegistrationUrl = createRegisterUrl(register_id, url)
+	const userRegistrationUrl = create_register_url(register_id, url)
 
 	try {
-		await nodeMailerManager.sendMail(
+		await nodeMailerManager.send_mail(
 			email,
 			'mission ユーザー仮登録',
 			`ユーザー仮登録を行いました。以下のリンクをクリックして登録を完了させてください。\n ${userRegistrationUrl}`
@@ -58,6 +58,6 @@ async function sendRegisterMail(email: string, register_id: string, url: string)
 	}
 }
 
-function createRegisterUrl(register_id: string, url) {
+function create_register_url(register_id: string, url) {
 	return `${url}/${register_id}`
 }

@@ -9,7 +9,7 @@ export class CookiesManager {
 		return this._cookies.get(CookiesManager._session_id_key) ?? ''
 	}
 
-	public setSessionId(session_id: string, max_age_sec: number): void {
+	public set_session_id(session_id: string, max_age_sec: number): void {
 		this._cookies.set(CookiesManager._session_id_key, session_id, {
 			path: '/',
 			maxAge: max_age_sec,
@@ -20,7 +20,7 @@ export class CookiesManager {
 		})
 	}
 
-	public deleteSessionId(): void {
+	public delete_session_id(): void {
 		this._cookies.delete(CookiesManager._session_id_key)
 	}
 }

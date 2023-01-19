@@ -15,7 +15,7 @@ export class NodemailerManager {
 		})
 	}
 
-	public async sendMail(to: string, subject: string, text: string): Promise<unknown> {
+	public async send_mail(to: string, subject: string, text: string): Promise<unknown> {
 		const from = process.env.GMAIL_USER
 
 		return await this._transporter.sendMail({ from, to, subject, text })
