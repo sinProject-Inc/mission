@@ -10,6 +10,12 @@ export class Auth {
 		new CookiesManager(cookies).setSessionId(auth_token.token, session_lifetime_sec)
 	}
 
+	public static async logout(cookies: Cookies): Promise<void> {
+		const cookiesManager = new CookiesManager(cookies)
+		await db.authToken.delete({ where: { token: cookiesManager.session_id } })
+		cookiesManager.deleteSessionId()
+	}
+
 	public static async getSessionLifetimeSec(): Promise<number> {
 		return await Database.getAppSettingInt('session_lifetime_sec')
 	}
