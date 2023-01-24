@@ -3,6 +3,8 @@
 	import { onMount } from 'svelte'
 	import { Api } from '$lib/api'
 	import { dialogs } from 'svelte-dialogs'
+	import { Email } from '$lib/general/email'
+	import { EmptyError, IllegalValueError } from '$lib/general/errors'
 	import '../../assets/css/common.css'
 
 	let email_input_element: HTMLInputElement
@@ -16,25 +18,30 @@
 	onMount(() => email_input_element.focus())
 
 	const onBlurEmail = async () => {
+		let email: Email
 		error_email = ''
-		const email = email_input_element.value.trim()
 
-		if (email === '') return;
-
-		//@ts-ignore
-		const isValid = await new Api().validate_email(email)
-		if (!isValid) {
-			error_email = '正しいメールアドレスを入力してください'
+		try {
+			email = new Email(email_input_element.value)
+		} catch (error: Error | unknown) {
+			if (error instanceof EmptyError) {
+				error_email = 'メールアドレスを入力してください'
+			}
+			if (error instanceof IllegalValueError) {
+				error_email = '正しいメールアドレスを入力してください'
+			}
 			email_input_element.focus()
+			return
 		}
-		email_input_element.value = email
+
+		email_input_element.value = email.email
 	}
 
 	const onBlurPassword = async () => {
 		error_password = ''
 		const password = password_input_element.value.trim()
 
-		if (password === '') return;
+		if (password === '') return
 
 		const isValid = await new Api().validate_password(password)
 		if (!isValid) {
@@ -50,7 +57,7 @@
 		error_username = ''
 		const username = username_input_element.value.trim()
 
-		if (username === '') return;
+		if (username === '') return
 
 		//@ts-ignore
 		const isExist = await new Api().username_exists(username)
