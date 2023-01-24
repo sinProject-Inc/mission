@@ -7,6 +7,7 @@
 	let task_input_element: HTMLInputElement
 	let description_input_element: HTMLTextAreaElement
 	let price_input_element: HTMLInputElement
+	let deadline_input_element: HTMLInputElement
 
 	onMount(() => task_input_element.focus())
 </script>
@@ -59,6 +60,13 @@
 					/>
 					<span>円</span>
 				</div>
+					<input
+						type="date"
+						bind:this={deadline_input_element}
+						name="deadline"
+						placeholder="期限"
+						required
+					/>
 				<div class="buttons">
 					<button type="submit" class="button">ミッション登録</button>
 				</div>
@@ -71,6 +79,9 @@
 </div>
 
 <style>
+	form div {
+		color: #fff;
+	}
 	input textarea {
 		width: calc(100% - 18px);
 	}
