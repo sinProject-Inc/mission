@@ -4,6 +4,7 @@
 	import { Api } from '$lib/api'
 	import { dialogs } from 'svelte-dialogs'
 	import { Email } from '$lib/general/email'
+	import { Password } from '$lib/general/password'
 	import { EmptyError, IllegalValueError } from '$lib/general/errors'
 	import '../../assets/css/common.css'
 
@@ -39,18 +40,23 @@
 
 	const onBlurPassword = async () => {
 		error_password = ''
-		const password = password_input_element.value.trim()
+		let password: Password
 
-		if (password === '') return
-
-		const isValid = await new Api().validate_password(password)
-		if (!isValid) {
-			error_password =
-				'パスワードは半角小文字、半角大文字、数字をすべて含む8文字以上で入力してください'
+		try {
+			password = new Password(password_input_element.value)
+		} catch (error: Error | unknown) {
+			if (error instanceof EmptyError) {
+				error_password = 'パスワードを入力してください'
+			}
+			if (error instanceof IllegalValueError) {
+				error_password =
+					'パスワードは半角小文字、半角大文字、数字をすべて含む8文字以上で入力してください'
+			}
 			password_input_element.focus()
+			return
 		}
 
-		password_input_element.value = password
+		password_input_element.value = password.password
 	}
 
 	const onBlurUsername = async () => {
