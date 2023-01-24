@@ -18,7 +18,7 @@ module.exports = {
 		node: true
 	},
 	rules: {
-		'@typescript-eslint/explicit-member-accessibility': ['error'],
+		'@typescript-eslint/explicit-member-accessibility': ['off'],
 		'@typescript-eslint/explicit-function-return-type': ['warn'],
 		'@typescript-eslint/naming-convention': [
 			'error',
