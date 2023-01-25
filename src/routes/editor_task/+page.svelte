@@ -2,10 +2,15 @@
 	import { enhance } from '$app/forms'
 	import { onMount } from 'svelte'
 	import { dialogs } from 'svelte-dialogs'
+	import { format_yyyy_mm_dd } from '$lib/date_formatter'
+
 	import '../../assets/css/common.css'
 	import type { PageData } from './$types'
 
 	export let data: PageData
+
+	const deadline = data.task?.deadline
+	let formattedDeadline = format_yyyy_mm_dd(deadline)
 
 	let tittle: HTMLInputElement
 
@@ -53,6 +58,15 @@
 					/>
 					<span>円</span>
 				</div>
+				<div>
+					<input
+						value={formattedDeadline}
+						type="date"
+						name="deadline"
+						placeholder="納期"
+						required
+					/>
+				</div>
 				<div class="buttons">
 					<button type="submit" class="button">更新</button>
 				</div>
@@ -65,6 +79,10 @@
 </div>
 
 <style>
+	form div {
+		color: #fff;
+	}
+
 	input textarea {
 		width: calc(100% - 18px);
 	}
