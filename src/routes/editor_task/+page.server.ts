@@ -21,6 +21,7 @@ export const actions: Actions = {
 		const description = data.get('description') as string
 		const price = data.get('price') as string
 		const priceIntvalue = Number(price)
+		const deadline = data.get('deadline') as string
 		await db.task.update({
 			where: {
 				id: idIntvalue,
@@ -29,6 +30,7 @@ export const actions: Actions = {
 				name: task,
 				description: description,
 				price: priceIntvalue,
+				deadline: new Date(deadline),
 				updateDate: new Date(),
 			},
 		})

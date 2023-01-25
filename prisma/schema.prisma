@@ -27,6 +27,7 @@ model Task {
   name        String?  @db.VarChar(255)
   description String   @db.VarChar(255)
   price       Int
+  deadline    DateTime @db.DateTime(0)
   updateDate  DateTime @db.DateTime(0)
   createDate  DateTime @default(now())
 }
