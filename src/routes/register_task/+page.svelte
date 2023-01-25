@@ -32,6 +32,7 @@
 							task_input_element.value = ''
 							description_input_element.value = ''
 							price_input_element.value = ''
+							deadline_input_element.value = ''
 							dialogs.alert(result.data.message)
 						}
 					}
@@ -60,13 +61,13 @@
 					/>
 					<span>円</span>
 				</div>
-					<input
-						type="date"
-						bind:this={deadline_input_element}
-						name="deadline"
-						placeholder="期限"
-						required
-					/>
+				<input
+					type="date"
+					bind:this={deadline_input_element}
+					name="deadline"
+					placeholder="期限"
+					required
+				/>
 				<div class="buttons">
 					<button type="submit" class="button">ミッション登録</button>
 				</div>
